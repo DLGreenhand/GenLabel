@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "puppeteer": "^13.4.1",
+    "redlock": "^v5.0.0-beta.2"
+  },
+  "name": "app",
+  "version": "1.0.0",
+  "main": "ex.js",
+  "devDependencies": {
+    "puppeteer": "^13.5.0",
+    "request": "^2.88.2"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "directories": {
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DLGreenhand/GenLabel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DLGreenhand/GenLabel/issues"
+  },
+  "homepage": "https://github.com/DLGreenhand/GenLabel#readme",
+  "description": ""
+}
