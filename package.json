@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "async": "^3.2.3",
     "cheerio": "^1.0.0-rc.10",
+    "csvtojson": "^2.0.10",
+    "node-schedule": "^2.1.0",
     "puppeteer": "^13.4.1",
     "redlock": "^v5.0.0-beta.2"
   },
@@ -8,6 +11,7 @@
   "version": "1.0.0",
   "main": "ex.js",
   "devDependencies": {
+    "node-schedule": "^2.1.0",
     "puppeteer": "^13.5.0",
     "request": "^2.88.2"
   },
