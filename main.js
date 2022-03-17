@@ -14,7 +14,7 @@ console.table(args);
       const { csvPath = 'data/test.csv', savePath, pages, times, interval } = args;
       const urls = await parseCSV(csvPath);
       const abSavePath = resolve(savePath);
-      fs.ensureDirSync(savePath);
+      fs.ensureDirSync(abSavePath);
 
       const browser = await puppeteer.launch(
         {
@@ -30,7 +30,7 @@ console.table(args);
     case 'gui': {
       const { url = "http://10.214.199.218:8087/", savePath, pages, times } = args;
       const abSavePath = resolve(savePath);
-      fs.ensureDirSync(savePath);
+      fs.ensureDirSync(abSavePath);
 
       const browser = await puppeteer.launch(
         {
@@ -38,7 +38,7 @@ console.table(args);
           ignoreDefaultArgs: ['--enable-automation']
         });
 
-      await genUIComponentLabel(browser, url, abSavePath, pages, times)
+      await genUIComponentLabel({ browser, url, abSavePath, pages, times })
 
       await browser.close();
       break;

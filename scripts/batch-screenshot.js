@@ -1,9 +1,9 @@
-const intervalScreenshot = (page, url, savePath, interval, times) => new Promise(async (resolve) => {
+const intervalScreenshot = (page, url, abSavePath, interval, times) => new Promise(async (resolve) => {
     let cnt = 0;
     await page.goto(url.address, { waitUntil: 'networkidle0', timeout: 0 });
 
     const intervalId = setInterval(async () => {
-        await page.screenshot({ path: `${savePath}/u_${`${url.id}`.padStart(5, "0")}_${`${cnt}`.padStart(3, "0")}.png` });
+        await page.screenshot({ path: `${abSavePath}/u_${`${url.id}`.padStart(5, "0")}_${`${cnt}`.padStart(3, "0")}.png` });
         ++cnt;
         if (times === cnt) {
             clearInterval(intervalId);
@@ -12,7 +12,7 @@ const intervalScreenshot = (page, url, savePath, interval, times) => new Promise
     }, interval)
 })
 
-const pageScreenshot = (batch, browser, urls, savePath, interval = 1000, times = 5) => new Promise(async (resolve) => {
+const pageScreenshot = (batch, browser, urls, abSavePath, interval = 1000, times = 5) => new Promise(async (resolve) => {
     const page = await browser.newPage();
 
     await page.setDefaultNavigationTimeout(0);
@@ -22,7 +22,7 @@ const pageScreenshot = (batch, browser, urls, savePath, interval = 1000, times =
     });
 
     for (let i = 0; i < urls.length; i++) {
-        await intervalScreenshot(page, { id: batch + i, address: urls[i] }, savePath, interval, times);
+        await intervalScreenshot(page, { id: batch + i, address: urls[i] }, abSavePath, interval, times);
     }
 
     await page.close();
@@ -30,14 +30,14 @@ const pageScreenshot = (batch, browser, urls, savePath, interval = 1000, times =
     resolve();
 })
 
-const batchScreenshot = async ({ browser, urls, savePath, pages = 5, interval = 1000, times = 5 }) => {
+const batchScreenshot = async ({ browser, urls, abSavePath, pages = 5, interval = 1000, times = 5 }) => {
 
     console.time(`每隔${interval}ms截图一次，${times}次/网站，${urls.length}个网站共耗时：`)
 
     let promises = [];
-    const batchSIze = Math.floor(urls.length / pages);
-    for (let i = 0; i < urls.length; i = i + batchSIze) {
-        promises.push(pageScreenshot(i, browser, urls.slice(i, i + batchSIze), savePath, interval, times))
+    const batchSize = Math.floor(urls.length / pages);
+    for (let i = 0; i < urls.length; i = i + batchSize) {
+        promises.push(pageScreenshot(i, browser, urls.slice(i, i + batchSize), abSavePath, interval, times))
     }
 
     await Promise.all(promises);

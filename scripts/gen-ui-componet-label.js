@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 
-const pageScreenshot = (batch, browser, url, savePath, times) => new Promise(async (resolve) => {
+const pageScreenshot = (batch, browser, url, abSavePath, times) => new Promise(async (resolve) => {
     const page = await browser.newPage();
 
     await page.setDefaultNavigationTimeout(0);
@@ -11,7 +11,7 @@ const pageScreenshot = (batch, browser, url, savePath, times) => new Promise(asy
     await page.goto(url, { waitUntil: 'networkidle0', timeout: 0 });
 
     for (let i = 0; i < times; i++) {
-        await page.screenshot({ path: `${savePath}/u_${`${batch * times + i}`.padStart(5, "0")}.png` });
+        await page.screenshot({ path: `${abSavePath}/u_${`${batch * times + i}`.padStart(5, "0")}.png` });
 
         const arr = await page.$$eval('.component', (items) => {
             var myCanvas = document.createElement("canvas");
@@ -55,10 +55,10 @@ const pageScreenshot = (batch, browser, url, savePath, times) => new Promise(asy
 
         })
 
-        await page.screenshot({ path: `${savePath}/u_${`${batch * times + i}`.padStart(5, "0")}_gnd.png` });
+        await page.screenshot({ path: `${abSavePath}/u_${`${batch * times + i}`.padStart(5, "0")}_gnd.png` });
 
         const jsonObject = { cpn_infos: arr };
-        fs.writeFile(`${savePath}/u_${`${batch * times + i}`.padStart(5, "0")}_lb.json`, JSON.stringify(jsonObject))
+        fs.writeFile(`${abSavePath}/u_${`${batch * times + i}`.padStart(5, "0")}_lb.json`, JSON.stringify(jsonObject))
 
         await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
     }
@@ -68,13 +68,13 @@ const pageScreenshot = (batch, browser, url, savePath, times) => new Promise(asy
     resolve();
 })
 
-const genUIComponentLabel = async (browser, url, savePath, pages = 5, times = 3000) => {
+const genUIComponentLabel = async ({ browser, url, abSavePath, pages = 5, times = 3000 }) => {
 
     console.time(`单页${times}次截图共耗时：`)
 
     let promises = [];
     for (let i = 0; i < pages; ++i) {
-        promises.push(pageScreenshot(i, browser, url, savePath, Math.ceil(times / pages)))
+        promises.push(pageScreenshot(i, browser, url, abSavePath, Math.ceil(times / pages)))
     }
     await Promise.all(promises);
 
