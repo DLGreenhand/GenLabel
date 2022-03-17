@@ -95,3 +95,63 @@ optional arguments:
   -t TIMES, --times TIMES
                         screenshot times
 ```
+
+## Example
+
+### 单页批量自动刷新&截图
+
+- 原始图
+
+<img src="example/bs-example.png" width = "195" height = "422" alt="bs-example" />
+
+- 标注图
+
+<img src="example/bs-example-gnd.png" width = "195" height = "422" alt="bs-example-gnd" />
+
+- label
+```json
+{
+    "cpn_infos": [
+        {
+            "Type": "BreadCrumb",
+            "Position": {
+                "left": 105,
+                "top": 20,
+                "right": 277,
+                "bottom": 36
+            },
+            "Text": "82Gy   GuLSL   pJS   Afao   "
+        },
+        {
+            "Type": "PaginationCpn",
+            "Position": {
+                "left": 32,
+                "top": 40.421875,
+                "right": 350,
+                "bottom": 80.421875
+            },
+            "Text": ""
+        },
+        {
+            "Type": "TransferCpn",
+            "Position": {
+                "left": 20,
+                "top": 80.421875,
+                "right": 362,
+                "bottom": 312.390625
+            },
+            "Text": "sypA   9   odre   EI58   yYr   "
+        },
+        {
+            "Type": "PaginationCpn",
+            "Position": {
+                "left": 145.5,
+                "top": 312.390625,
+                "right": 236.5,
+                "bottom": 336.390625
+            },
+            "Text": ""
+        }
+    ]
+}
+```
