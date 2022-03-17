@@ -42,6 +42,14 @@ const pageScreenshot = (batch, browser, url, savePath, times) => new Promise(asy
                     tmp.Position.top,
                     (tmp.Position.right - tmp.Position.left),
                     tmp.Position.bottom - tmp.Position.top);
+                const width = ctx.measureText(tmp.Type).width;
+                const padding = 4;
+                const fontSize = 16;
+                ctx.fillStyle = "white";
+                ctx.fillRect(tmp.Position.left - padding, tmp.Position.top - 5 - fontSize - padding / 2, width + padding, fontSize + padding);
+                ctx.font = `bold ${fontSize}px Arial`;
+                ctx.fillStyle = "brown";
+                ctx.fillText(tmp.Type, tmp.Position.left - padding / 2, tmp.Position.top - 5 - padding / 2);
                 return tmp;
             })
 
