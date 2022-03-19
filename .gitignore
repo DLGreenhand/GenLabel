@@ -2,3 +2,6 @@ node_modules
 screenshots
 build
 data
+nohup.out
+.vscode
+logs

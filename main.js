@@ -28,11 +28,8 @@ console.table(args);
       break;
     }
     case 'gui': {
-      const { url = "http://localhost:3333/#/", savePath, pages, times } = args;
+      const { url = "http://localhost:3333/#/", savePath, pages, times, type } = args;
       const abSavePath = resolve(savePath);
-      fs.ensureDirSync(abSavePath+'/labels/');
-      fs.ensureDirSync(abSavePath+'/images/');
-      fs.ensureDirSync(abSavePath+'/images-gnd/');
       
       const browser = await puppeteer.launch(
         {
@@ -40,7 +37,7 @@ console.table(args);
           ignoreDefaultArgs: ['--enable-automation']
         });
 
-      await genUIComponentLabel({ browser, url, abSavePath, pages, times })
+      await genUIComponentLabel({ browser, url, abSavePath, pages, times, type })
 
       await browser.close();
       break;

@@ -1,4 +1,4 @@
-import batchScreenshot from "./batch-screenshot";
-import genUIComponentLabel from "./gen-ui-componet-label";
+import batchScreenshot from './batch-screenshot';
+import genUIComponentLabel from './gen-ui-componet-label';
 
-export { batchScreenshot, genUIComponentLabel};
+export { batchScreenshot, genUIComponentLabel };

@@ -19,8 +19,9 @@ batchScreenshot.add_argument('-i', '--interval', { type: 'int', default: 500, he
 
 const genUIComponentLabel = subparsers.add_parser('gui', { help: 'generate UI component labels' });
 genUIComponentLabel.add_argument('-url', '--url', { type: 'str', help: 'url to generate ui component labels' });
-genUIComponentLabel.add_argument('-sp', '--savePath', { type: 'str', default: "screenshots/ui-components/", help: 'dir path to save screenshots' });
+genUIComponentLabel.add_argument('-sp', '--savePath', { type: 'str', default: "screenshots/ui-components", help: 'dir path to save screenshots' });
 genUIComponentLabel.add_argument('-p', '--pages', { type: 'int', default: 5, help: 'num of pages to open at once in puppeteer browser' });
 genUIComponentLabel.add_argument('-t', '--times', { type: 'int', default: 300, help: 'screenshot times' });
+genUIComponentLabel.add_argument('-tp', '--type', { type: 'str', default: 'train', help: 'dataset type, train/val/test' });
 
 export default argparser;

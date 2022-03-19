@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx prettier --write '@(src|test|scripts)/**/*.@(js|json)' && git add .",
     "build": "rollup -c",
     "mkd": "cnpm run build && node --trace-warnings build/dataset-utils.js"
   },
@@ -29,6 +29,8 @@
     "argparse": "^2.0.1",
     "fast-csv": "^4.3.6",
     "fs-extra": "^10.0.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.6.0",
     "puppeteer": "^13.5.0",
     "rollup": "^2.70.1"
   }
