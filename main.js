@@ -28,10 +28,12 @@ console.table(args);
       break;
     }
     case 'gui': {
-      const { url = "http://10.214.199.218:8087/", savePath, pages, times } = args;
+      const { url = "http://localhost:3333/#/", savePath, pages, times } = args;
       const abSavePath = resolve(savePath);
-      fs.ensureDirSync(abSavePath);
-
+      fs.ensureDirSync(abSavePath+'/labels/');
+      fs.ensureDirSync(abSavePath+'/images/');
+      fs.ensureDirSync(abSavePath+'/images-gnd/');
+      
       const browser = await puppeteer.launch(
         {
           args: ['--start-maximized'],
