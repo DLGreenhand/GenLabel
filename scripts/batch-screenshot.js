@@ -4,7 +4,17 @@ const intervalScreenshot = (page, url, abSavePath, interval, times) =>
     new Promise(async (resolve, reject) => {
         let cnt = -1;
         await page
-            .goto(url.address, { waitUntil: 'networkidle0', timeout: 0 })
+            .goto(url.address, { waitUntil: 'networkidle0' })
+            .catch((err) => reject(err));
+
+        await page
+            .evaluate(
+                async () =>
+                    new Promise((resolve) => {
+                        window.scrollBy(0, 10);
+                        resolve();
+                    })
+            )
             .catch((err) => reject(err));
 
         const intervalId = setInterval(async () => {
@@ -45,7 +55,7 @@ const pageScreenshot = (
     interval = 1000,
     times = 5
 ) =>
-    new Promise(async (resolve) => {
+    new Promise(async (resolve, reject) => {
         const page = await browser.newPage();
 
         let errUrls = [];
@@ -69,7 +79,7 @@ const pageScreenshot = (
             });
         }
 
-        await page.close();
+        await page.close().catch((err) => reject(err));
 
         resolve(errUrls);
     });
